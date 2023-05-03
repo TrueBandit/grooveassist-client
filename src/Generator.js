@@ -14,7 +14,7 @@ function Generator() {
 
     const gen = async () =>
     {
-            const response = await axios.post('http://localhost:8000/api/generate', promptItem);
+            const response = await axios.post('https://grooveassist-server.onrender.com/api/generate', promptItem);
             console.log('Response:', response.data);
             const parsedResponse = JSON.parse(response.data);
             setGeneratedProg({chords : parsedResponse.song.chords, song_description : parsedResponse.song.explanation})
