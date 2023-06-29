@@ -1,5 +1,5 @@
 import './design/App.css';
-import Generator from './Generator'
+import Generator from './generator/Generator_main'
 import { useNavigate, Route, Routes } from "react-router-dom";
 
 function App() {

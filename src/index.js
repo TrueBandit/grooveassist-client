@@ -1,21 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+// Apollo GraphQL //
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+import { createClient } from 'graphql-ws';
+import { split, HttpLink } from '@apollo/client';
+import { getMainDefinition } from '@apollo/client/utilities';
+
 import App from './App';
 import './design/index.css';
 import { BrowserRouter } from "react-router-dom";
-import {createStore} from 'redux'
-import {Provider} from 'react-redux'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import DataReducer from './utilities/DataReducer';
 
-import DataReducer  from './utilities/DataReducer'
-const appStore = createStore(DataReducer)
+const httpLink = new HttpLink({
+  uri: 'https://groove-assist-3e1c77933a97.herokuapp.com/graphql'
+});
+const wsLink = new GraphQLWsLink(createClient({
+  url: 'ws://groove-assist-3e1c77933a97.herokuapp.com/graphql',
+}));
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink,
+);
+const client = new ApolloClient({
+  link: splitLink,
+  cache: new InMemoryCache()
+});
+
+const appStore = createStore(DataReducer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <>
-    <BrowserRouter>
-      <Provider store={appStore}>
-      <div><App /></div>
-      </Provider>
-    </BrowserRouter>
-  </>
+  <BrowserRouter>
+    <ApolloProvider client={client}>
+          <App />
+    </ApolloProvider>
+  </BrowserRouter>
+
 );
