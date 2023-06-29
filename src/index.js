@@ -18,7 +18,7 @@ const httpLink = new HttpLink({
   uri: 'https://groove-assist-3e1c77933a97.herokuapp.com/graphql'
 });
 const wsLink = new GraphQLWsLink(createClient({
-  url: 'ws://groove-assist-3e1c77933a97.herokuapp.com/graphql',
+  url: 'wss://groove-assist-3e1c77933a97.herokuapp.com/graphql',
 }));
 const splitLink = split(
   ({ query }) => {
