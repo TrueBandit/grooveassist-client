@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 // Apollo GraphQL //
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
@@ -15,10 +15,10 @@ import { Provider } from 'react-redux';
 import DataReducer from './utilities/DataReducer';
 
 const httpLink = new HttpLink({
-  uri: 'https://groove-assist-3e1c77933a97.herokuapp.com/graphql'
+  uri: process.env.REACT_APP_HTTPLINK
 });
 const wsLink = new GraphQLWsLink(createClient({
-  url: 'wss://groove-assist-3e1c77933a97.herokuapp.com/graphql',
+  url: process.env.REACT_APP_WSLINK
 }));
 const splitLink = split(
   ({ query }) => {
