@@ -9,15 +9,20 @@ import MusicNoteRoundedIcon from '@mui/icons-material/MusicNoteRounded';
 import Stack from '@mui/material/Stack';
 import ChordComp from './ChordComp'
 
+const GET_REQUEST_ID = gql`
+mutation {
+  getRequestID
+}`
 const GENERATE_CHORDS = gql`
-mutation ($promptObj: PromptObjectInput) {
-  generateResponse(PromptObj: $promptObj)
+mutation ($promptObj: PromptObjectInput, $requestId: String) {
+  generateResponse(promptObj: $promptObj, requestId: $requestId)
 }`
 const SUBSCRIBE_CHORDS_STREAM = gql`
-subscription responseStream{
-  responseStream
-}
-`
+subscription ($id: String){
+  responseStream(id: $id)
+}`
+
+
 function StreamingOpenAIComponent() {
   //the prompt the user builds
   const [promptObject, setPromptObject] = useState({artist : "" , genre : "" , level : "" , bars : "" , key : "" });
@@ -38,10 +43,12 @@ function StreamingOpenAIComponent() {
     //reading the chords part in the stream
   const [semek, setSemek] = useState(0);
 
-  const [generateResponse, generateResponseResult] = useMutation(GENERATE_CHORDS)
+  const [requestID, setRequestID] = useState("")
 
-
+  const [generateResponseMutation, generateResponseResult] = useMutation(GENERATE_CHORDS)
+  const [requestIDMutation, requestIDResult] = useMutation(GET_REQUEST_ID)
   const {} = useSubscription(SUBSCRIBE_CHORDS_STREAM, {
+    variables: { id: requestID },
     onData: (data) => {
       const delta = data.data.data.responseStream
       setStreamString(prevstreamString => prevstreamString + delta)
@@ -49,7 +56,16 @@ function StreamingOpenAIComponent() {
   })
 
   useEffect(() => {
+    requestIDMutation()
+  }, [])
 
+  useEffect(() => {
+    if (requestIDResult.data) {
+      setRequestID(requestIDResult.data.getRequestID)
+    }
+  }, [requestIDResult.data])
+  
+  useEffect(() => {
     let delta = streamString.replace(deltaString,"")
     setDeltaString(streamString)
     let aidCounter = 0
@@ -106,7 +122,7 @@ function StreamingOpenAIComponent() {
     setDescString("")
     setReadingChords("not started")
     setStreaming(true)
-    generateResponse({ variables: { "promptObj" : promptObject} });
+    generateResponseMutation({ variables: { "promptObj" : promptObject , "requestId" : requestID} });
   };
 
   return (

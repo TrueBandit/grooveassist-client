@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 // Apollo GraphQL //
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
