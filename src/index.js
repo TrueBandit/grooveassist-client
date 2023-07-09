@@ -1,19 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import App from './App';
+import './design/index.css';
 // Apollo GraphQL //
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { split, HttpLink } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
-
-import App from './App';
-
-import './design/index.css';
+// Router //
 import { BrowserRouter } from "react-router-dom";
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import DataReducer from './utilities/DataReducer';
+
 
 const httpLink = new HttpLink({
   uri: process.env.REACT_APP_HTTPLINK
@@ -37,7 +34,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-const appStore = createStore(DataReducer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -46,5 +42,5 @@ root.render(
           <App />
     </ApolloProvider>
   </BrowserRouter>
-
 );
+

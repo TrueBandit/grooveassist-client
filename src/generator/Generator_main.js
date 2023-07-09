@@ -127,7 +127,6 @@ function StreamingOpenAIComponent() {
 
   return (
     <div>
-        <h3>Progression Generator</h3>
         <Stack direction="row" spacing={1} justifyContent="center" alignItems="center" flexWrap="wrap">
             <Autocomplete
                 disablePortal
