@@ -8,6 +8,7 @@ import { split, HttpLink } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 
 import App from './App';
+
 import './design/index.css';
 import { BrowserRouter } from "react-router-dom";
 import { createStore } from 'redux';
