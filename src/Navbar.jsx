@@ -2,12 +2,13 @@ import * as React from 'react';
 import logo from './design/logo.png'
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from "react-router-dom";
 
 import {
   AppBar,
   Box,
-  styled,
   Toolbar,
   Typography,
   Container
@@ -17,43 +18,28 @@ function ResponsiveAppBar() {
 
   const navigate = useNavigate();
 
-  const StyledToolbar = styled(Toolbar)({
-    display: "flex",
-    justifyContent: "space-between"
-  });
-  const LogoBox = styled(Box)(({ theme }) => ({ 
-    display: "flex", 
-    gap: "10px", 
-    alignItems: "center"
-  }));
-  const DesktopMenu = styled(Box)(({ theme }) => ({
-    display: "none",
-    alignItems: "center",
-    gap: "20px",
-    [theme.breakpoints.up("sm")]: {
-      display: "flex",
-    },
-  }));
-  const MobileMenu = styled(Box)(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  }));
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <StyledToolbar>
+        <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
           
-            <LogoBox onClick={() => navigate('/')} sx={{ cursor: 'pointer' }}>
+            <Box onClick={() => navigate('/')} sx={{ cursor: 'pointer', display: "flex", gap: "10px", alignItems: "center" }}>
               <img src={logo} alt="Logo" height={40}/>
               <Typography variant="h5">Groove Assist</Typography>
-            </LogoBox>
+            </Box>
 
-            <DesktopMenu> 
+            <Box sx={{alignItems: "center", gap: "20px", display: { xs: 'none', md: 'flex' }}}> 
               <Typography onClick={() => navigate('/generate')} 
                 sx={{ cursor: 'pointer' , textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>Generate</Typography>
               <Typography onClick={() => navigate('/community')} 
@@ -61,20 +47,47 @@ function ResponsiveAppBar() {
               <Typography onClick={() => navigate('/login')} 
                 sx={{ cursor: 'pointer' , textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>Login</Typography>
               <Typography>Dark Mode</Typography>
-            </DesktopMenu>
+            </Box>
 
-            <MobileMenu>
+            <Box sx={{alignItems: "center", gap: "10px", display: { xs: 'flex', md: 'none' }}}>
               <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu">
-              <MenuIcon />
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
               </IconButton>
-            </MobileMenu>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                getContentAnchorEl={null}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                <MenuItem onClick={handleCloseNavMenu}><Typography textAlign="center" onClick={() => navigate('/generate')}>Generate</Typography></MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}><Typography textAlign="center" onClick={() => navigate('/community')}>Community</Typography></MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}><Typography textAlign="center" onClick={() => navigate('/login')}>Login</Typography></MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}><Typography textAlign="center">Dark Mode</Typography></MenuItem>
+              </Menu>
+            </Box>
 
 
-        </StyledToolbar>
+        </Toolbar>
       </Container>
     </AppBar>
 
