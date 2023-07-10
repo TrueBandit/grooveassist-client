@@ -1,18 +1,8 @@
 import * as React from 'react';
 import logo from './design/logo.png'
-import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from "react-router-dom";
-
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  Typography,
-  Container
-} from "@mui/material";
+import { Menu, MenuItem, AppBar, Box, Toolbar, Typography, Container, IconButton } from "@mui/material";
 
 function ResponsiveAppBar() {
 
@@ -79,9 +69,9 @@ function ResponsiveAppBar() {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                <MenuItem onClick={handleCloseNavMenu}><Typography textAlign="center" onClick={() => navigate('/generate')}>Generate</Typography></MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}><Typography textAlign="center" onClick={() => navigate('/community')}>Community</Typography></MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}><Typography textAlign="center" onClick={() => navigate('/login')}>Login</Typography></MenuItem>
+                <MenuItem onClick={()=>{handleCloseNavMenu(); navigate('/generate')}}><Typography textAlign="center">Generate</Typography></MenuItem>
+                <MenuItem onClick={()=>{handleCloseNavMenu(); navigate('/community')}}><Typography textAlign="center">Community</Typography></MenuItem>
+                <MenuItem onClick={()=>{handleCloseNavMenu(); navigate('/login')}}><Typography textAlign="center">Login</Typography></MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}><Typography textAlign="center">Dark Mode</Typography></MenuItem>
               </Menu>
             </Box>

@@ -17,7 +17,6 @@ function Main() {
       <Route path="generate" element={<Generator/>} />
       <Route path="" element={<Landing/>} />
       <Route path="login" element={<Login/>} />
-      <Route path="landing" element={<Landing/>} />
     </Routes>
     </div>
   )
