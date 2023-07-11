@@ -8,6 +8,8 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import MusicNoteRoundedIcon from '@mui/icons-material/MusicNoteRounded';
 import Stack from '@mui/material/Stack';
 import ChordComp from './ChordComp'
+import { Menu, MenuItem, AppBar, Box, Toolbar, Typography, Container, IconButton, Grid } from "@mui/material";
+
 
 const GET_REQUEST_ID = gql`
 mutation {
@@ -127,53 +129,65 @@ function StreamingOpenAIComponent() {
 
   return (
     <div>
-        <Stack direction="row" spacing={1} justifyContent="center" alignItems="center" flexWrap="wrap">
-            <Autocomplete
-                disablePortal
-                options={artists}
-                size = "small"
-                sx={{ width: 250 }}
-                renderInput={(params) => <TextField {...params} label="Artist" />}
-                onChange={(event, newValue) => {setPromptObject({...promptObject, artist : newValue})}}
-            />
-            <Autocomplete
-                disablePortal
-                options={genres}
-                size = "small"
-                sx={{ width: 200 }}
-                renderInput={(params) => <TextField {...params} label="Genre" />}
-                onChange={(event, newValue) => {setPromptObject({...promptObject, genre : newValue})}}
-            />
-            <Autocomplete
-                disablePortal
-                options={levels}
-                size = "small"
-                sx={{ width: 200 }}
-                renderInput={(params) => <TextField {...params} label="Level" />}
-                onChange={(event, newValue) => {setPromptObject({...promptObject, level : newValue})}}
-            />
-            <Autocomplete
-                disablePortal
-                options={bars}
-                size = "small"
-                sx={{ width: 100 }}
-                renderInput={(params) => <TextField {...params} label="Bars" />}
-                onChange={(event, newValue) => {setPromptObject({...promptObject, bars : newValue})}}
-            />
-            <Autocomplete
-                disablePortal
-                options={keys}
-                size = "small"
-                sx={{ width: 100 }}
-                renderInput={(params) => <TextField {...params} label="Key" />}
-                onChange={(event, newValue) => {setPromptObject({...promptObject, key : newValue})}}
-            />
-            </Stack>
+            <Grid container spacing={1} alignItems="center" justifyContent="center">
+              <Grid item>
+                  <Autocomplete
+                      disablePortal
+                      options={artists}
+                      size = "small"
+                      sx={{ width: 180 }}
+                      renderInput={(params) => <TextField {...params} label="Artist" />}
+                      onChange={(event, newValue) => {setPromptObject({...promptObject, artist : newValue})}}
+                  />
+              </Grid>
+              <Grid item>
+                  <Autocomplete
+                      disablePortal
+                      options={genres}
+                      size = "small"
+                      sx={{ width: 180 }}
+                      renderInput={(params) => <TextField {...params} label="Genre" />}
+                      onChange={(event, newValue) => {setPromptObject({...promptObject, genre : newValue})}}
+                  />
+              </Grid>
+              <Grid item>
+                  <Autocomplete
+                      disablePortal
+                      options={levels}
+                      size = "small"
+                      sx={{ width: 180 }}
+                      renderInput={(params) => <TextField {...params} label="Level" />}
+                      onChange={(event, newValue) => {setPromptObject({...promptObject, level : newValue})}}
+                  />
+              </Grid>
+              <Grid item>
+                  <Autocomplete
+                      disablePortal
+                      options={bars}
+                      size = "small"
+                      sx={{ width: 80 }}
+                      renderInput={(params) => <TextField {...params} label="Bars" />}
+                      onChange={(event, newValue) => {setPromptObject({...promptObject, bars : newValue})}}
+                  />
+              </Grid>
+              <Grid item>
+                  <Autocomplete
+                      disablePortal
+                      options={keys}
+                      size = "small"
+                      sx={{ width: 80 }}
+                      renderInput={(params) => <TextField {...params} label="Key" />}
+                      onChange={(event, newValue) => {setPromptObject({...promptObject, key : newValue})}}
+                  />
+              </Grid>
+            </Grid>
+
             <br/>
             <LoadingButton size="small" onClick={submit} endIcon={<MusicNoteRoundedIcon />} loading={streaming} loadingPosition="end" variant="contained"><span>Generate</span></LoadingButton>
             <br/><br/>
+            { chordsArray.length > 0 && <>
             <div style={{margin:'auto',  paddingTop : "15px" ,paddingLeft : "10px" ,paddingRight : "10px" , paddingBottom : "20px" , width :'80%', backgroundColor: 'azure', borderRadius: "5px", boxShadow : "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"}}>
-            <div style={{margin:'auto', paddingTop : "10px" ,paddingLeft : "10px" ,paddingRight : "10px" , paddingBottom : "10px" , width :'60%', backgroundColor: 'aliceblue',borderRadius: "5px", boxShadow : "0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 6px 0 rgba(0, 0, 0, 0.19)"}}>
+            <div style={{margin:'auto', paddingTop : "10px" ,paddingLeft : "10px" ,paddingRight : "10px" , paddingBottom : "10px" , backgroundColor: 'aliceblue',borderRadius: "5px", boxShadow : "0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 6px 0 rgba(0, 0, 0, 0.19)"}}>
             <Stack direction="row" spacing={10} justifyContent="center" alignItems="center" flexWrap="wrap">
             {
               chordsArray.map((chord, index) =>
@@ -186,7 +200,7 @@ function StreamingOpenAIComponent() {
             <br/>
             {descString}
             
-            </div>
+            </div></>}
             <br/><br/><br/><br/>
             <div style={{margin: "auto", width :'80%', color:"LightSteelBlue"}}>
             {streamString}
