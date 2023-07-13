@@ -1,5 +1,5 @@
 import React from 'react'
-import GenComp from '../generator/Generator_main'
+import Generator_main from '../generator/Generator_main'
 import { Typography } from "@mui/material";
 
 function Generator() {
@@ -7,7 +7,7 @@ function Generator() {
     <div>
     <Typography variant="h6">Chord Progression Generator</Typography>
     <br/>
-    <GenComp/>
+    <Generator_main/>
     </div>
   )
 }
