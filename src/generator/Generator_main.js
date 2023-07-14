@@ -103,6 +103,7 @@ function StreamingOpenAIComponent() {
   // Listening to the mutation response when the server finished to stream
   useEffect(() => {
     if (generateResponseResult.data) {
+      setDescString(prevdescString => prevdescString.replace('"}',''))
       setStreaming(false)
     }
   }, [generateResponseResult.data]);
