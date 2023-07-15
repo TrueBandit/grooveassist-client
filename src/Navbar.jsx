@@ -36,7 +36,6 @@ function ResponsiveAppBar() {
                 sx={{ cursor: 'pointer' , textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>Community</Typography>
               <Typography onClick={() => navigate('/login')} 
                 sx={{ cursor: 'pointer' , textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>Login</Typography>
-              <Typography>Dark Mode</Typography>
             </Box>
 
             <Box sx={{alignItems: "center", gap: "10px", display: { xs: 'flex', md: 'none' }}}>
@@ -72,7 +71,6 @@ function ResponsiveAppBar() {
                 <MenuItem onClick={()=>{handleCloseNavMenu(); navigate('/generate')}}><Typography textAlign="center">Generate</Typography></MenuItem>
                 <MenuItem onClick={()=>{handleCloseNavMenu(); navigate('/community')}}><Typography textAlign="center">Community</Typography></MenuItem>
                 <MenuItem onClick={()=>{handleCloseNavMenu(); navigate('/login')}}><Typography textAlign="center">Login</Typography></MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}><Typography textAlign="center">Dark Mode</Typography></MenuItem>
               </Menu>
             </Box>
 

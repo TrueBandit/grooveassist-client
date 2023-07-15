@@ -5,18 +5,19 @@ import Community from './Community'
 import Generator from './Generator'
 import Landing from './Landing'
 import Login from './Login'
+import SignUp from './SignUp';
 
 function Main() {
 
   return (
     <div style={{textAlign:'center'}}>
     <Navbar/>
-    <br/>
     <Routes>
       <Route path="community" element={<Community/>} />
       <Route path="generate" element={<Generator/>} />
       <Route path="" element={<Landing/>} />
       <Route path="login" element={<Login/>} />
+      <Route path="signup" element={<SignUp/>} />
     </Routes>
     </div>
   )
