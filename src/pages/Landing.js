@@ -4,7 +4,7 @@ import { Typography, Container } from "@mui/material";
 
 function Landing() {
   return (
-    <Container sx={{marginTop: 4}}>
+    <Container sx={{marginTop: 4, marginBottom: 3}}>
       <Typography variant="subtitle1">
       Welcome to Groove Assist, where the power of artificial intelligence becomes your personal assistant in creativity!<br/><br/>
       Our state-of-the-art application empowers artists like you to create stunning, custom groove progressions effortlessly.<br/><br/>
