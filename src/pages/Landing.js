@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import sax from '../design/sax.png';
 import { Typography, Box, Grid, Button, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css'
 
 function Landing() {
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,  // AOS fade duration
+    });
+  }, []);
 
   return (
     <div>
@@ -16,7 +24,7 @@ function Landing() {
 
             {/* Text Grid Item */}
             <Grid item xs={12} md={6}>
-              <Box sx={{ textAlign: 'left' }}>
+              <Box data-aos="fade-right" sx={{ textAlign: 'left' }}>
                 <Typography variant="h3">
                   AI-Powered Music Mastery
                 </Typography>
