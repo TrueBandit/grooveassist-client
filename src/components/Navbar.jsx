@@ -20,7 +20,7 @@ function ResponsiveAppBar() {
 
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
           

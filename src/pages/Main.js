@@ -13,7 +13,6 @@ function Main() {
   return (
     <div style={{textAlign:'center'}}>
     <Navbar/>
-    <div style={{height: '55px'}}></div>
     <Routes>
       <Route path="community" element={<Community/>} />
       <Route path="generate" element={<Generator/>} />
