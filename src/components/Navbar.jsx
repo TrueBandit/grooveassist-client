@@ -1,5 +1,5 @@
 import * as React from 'react';
-import logo from './design/logo.png'
+import logo from '../design/logo.png'
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from "react-router-dom";
 import { Menu, MenuItem, AppBar, Box, Toolbar, Typography, Container, IconButton } from "@mui/material";
