@@ -11,7 +11,7 @@ function Landing() {
     <div>
     
     {/* Hero Section */}
-    <Box sx={{ margin: 'auto', paddingTop: "30px", paddingLeft: "30px", paddingRight: "30px", paddingBottom: "20px", height: "500px", backgroundColor: 'ghostwhite' }}>
+    <Box sx={{ margin: 'auto', paddingTop: "100px", paddingLeft: "30px", paddingRight: "30px", paddingBottom: "20px", height: "500px", backgroundColor: 'ghostwhite' }}>
       <Container maxWidth="xl">
       <Grid container spacing={1} alignItems="center" justifyContent="center">
 
