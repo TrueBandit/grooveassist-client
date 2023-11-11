@@ -20,7 +20,8 @@ function ProgressionComp(props) {
             </Box>
             <br/>
             {props.description}
-            
+            <br/><br/>
+            {props.similarsong}
             </Box></>}
 
 
