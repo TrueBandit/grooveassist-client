@@ -1,27 +1,76 @@
 import * as React from 'react';
+import { useEffect,useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
+import {gql, useLazyQuery, useQuery, useMutation} from '@apollo/client'
+
+const ADD_USER = gql`
+mutation($newUser: UserInput) {
+  addUser(newUser: $newUser) {
+    user {
+      _id,
+      email,
+      fname,
+      lname,
+      password,
+      type
+    }
+    token
+  }
+}`
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  
+  const navigate = useNavigate();
 
+  const [newUser, setnewUser] = useState({fname : "", lname : "", email : "", password : ""})
+  const [addUser, {loading, error, data}] = useMutation(ADD_USER)
+
+  const handleSubmit = async () => {
+    if (newUser.fname && newUser.lname && newUser.email && newUser.password) {
+      try {
+        await addUser({ variables: { newUser: newUser } });
+      } catch (e) {
+        //console.error(e);
+      }
+    }
+  };
+  
+
+  //Navigate out if user already logged in
+  useEffect(() => {
+    if (sessionStorage.getItem("userID")) {
+      navigate('/');
+    }
+  }, []);
+  
+  useEffect(() => {
+    if (error) {
+      if (error.message.includes('A user with this email already exists')) {
+        alert("Email already exists.");
+      } else {
+        console.error(error);
+      }
+    }
+    if (data) {
+      sessionStorage["userID"] = data.addUser.user._id
+      sessionStorage["userName"] = data.addUser.user.fname
+      sessionStorage["token"] = data.addUser.user.token
+      navigate('/');
+    }
+  }, [data, error]);
+  
+  
   return (
       <Container maxWidth="xs">
         <CssBaseline />
@@ -39,7 +88,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -50,6 +99,7 @@ export default function SignUp() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  onChange={e => {setnewUser({...newUser, fname : e.target.value})}}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -60,6 +110,7 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={e => {setnewUser({...newUser, lname : e.target.value})}}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -70,6 +121,7 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={e => {setnewUser({...newUser, email : e.target.value})}}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -81,20 +133,16 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={e => {setnewUser({...newUser, password : e.target.value})}}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
+              
             </Grid>
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleSubmit}
             >
               Sign Up
             </Button>

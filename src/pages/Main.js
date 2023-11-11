@@ -6,7 +6,8 @@ import Generator from './Generator'
 import Landing from './Landing'
 import Login from './Login'
 import SignUp from './SignUp';
-import { Height } from '@mui/icons-material';
+import Profile from './Profile';
+import MyHub from './MyHub';
 
 function Main() {
 
@@ -19,6 +20,8 @@ function Main() {
       <Route path="" element={<Landing/>} />
       <Route path="login" element={<Login/>} />
       <Route path="signup" element={<SignUp/>} />
+      <Route path="myhub" element={<MyHub/>} />
+      <Route path="profile" element={<Profile/>} />
     </Routes>
     </div>
   )
