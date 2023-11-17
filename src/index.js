@@ -10,7 +10,10 @@ import { split, HttpLink } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 // Router //
 import { BrowserRouter } from "react-router-dom";
-
+// Redux //
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import DataReducer from './utilities/DataReducer'
 
 const httpLink = new HttpLink({
   uri: process.env.REACT_APP_HTTPLINK
@@ -34,12 +37,15 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
+const appStore = createStore(DataReducer)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <ApolloProvider client={client}>
-          <App />
+      <Provider store={appStore}>
+        <App />
+      </Provider>
     </ApolloProvider>
   </BrowserRouter>
 );
