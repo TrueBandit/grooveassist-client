@@ -18,34 +18,21 @@ function StreamingOpenAIComponent() {
   const updatePromptObject = (newPromptObject) => {
     setPromptObject(newPromptObject);
   };
-
-  //the prompt the user builds- sent to server
+  // The prompt the user builds
   const [promptObject, setPromptObject] = useState({ artist: "", genre: "", level: "", bars: "", key: "" });
-  //while response is streaming from the server, loading will be true
-  const [streaming, setStreaming] = useState(false);
 
-  const [chordsArray, setChordsArray] = useState([])
-  const [chordsDescription, setChordsDescription] = useState("");
-  const [similarSong, setSimilarSong] = useState("");
-
-
-  // Listening to the mutation response when the server finished to stream
   useEffect(() => {
-    if (generateChordsResult.data) {
-      setChordsArray(generateChordsResult.data.generateChords.chords)
-      setChordsDescription(generateChordsResult.data.generateChords.exp)
-      setSimilarSong(generateChordsResult.data.generateChords.song)
-      dispatch({ type: "ADD", payload: { dataObj: generateChordsResult.data, entity: "chord_generation" } })
-      setStreaming(false)
+    if (generateChordsResult.data && generateChordsResult.data.generateChords) {
+      dispatch({ type: "ADD", payload: { dataObj: generateChordsResult.data.generateChords, entity: "newChordGeneration" } });
+      dispatch({ type: "UPDATE", payload: { dataObj: generateChordsResult.data.generateChords, entity: "changeProgressionDisplay" } });
     }
   }, [generateChordsResult.data]);
 
   const submit = async () => {
-    setStreaming(true)
     try {
       await generateChordsMutation({ variables: { promptObj: promptObject } });
     } catch (e) {
-      //console.error(e);
+      console.error(e);
     }
   };
 
@@ -55,11 +42,11 @@ function StreamingOpenAIComponent() {
       <br />
       <PromptInputComp updatePromptObject={updatePromptObject} />
       <br />
-      <LoadingButton size="small" onClick={submit} endIcon={<MusicNoteRoundedIcon />} loading={streaming} loadingPosition="end" variant="contained" color="secondary" ><span>Generate</span></LoadingButton>
+      <LoadingButton size="small" onClick={submit} endIcon={<MusicNoteRoundedIcon />} loading={generateChordsResult.loading} loadingPosition="end" variant="contained" color="secondary" ><span>Generate</span></LoadingButton>
       <br /><br />
       {generateChordsResult.loading ?
         <img src={loadGif} style={{ maxWidth: '85%', maxHeight: '400px' }} alt="loadGif" /> :
-        <ProgressionComp chords={chordsArray} description={chordsDescription} similarsong={similarSong} />}
+        <ProgressionComp />}
       <br /><br />
 
     </Box>
@@ -67,6 +54,3 @@ function StreamingOpenAIComponent() {
 }
 
 export default StreamingOpenAIComponent;
-
-
-

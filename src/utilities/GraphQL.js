@@ -10,7 +10,8 @@ export const useGraphQLActions = () => {
       chord
     }
     exp,
-    song
+    song,
+    brief
   }
 }`
 

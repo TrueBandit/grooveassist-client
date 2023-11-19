@@ -6,9 +6,8 @@ import GenerationList from '../generator/GenerationsHistoryList';
 import GenerationsDrawer from '../generator/GenerationsHistoryDrawer';
 
 function Generator() {
-  const [drawerOpen, setDrawerOpen] = useState(false); // State to control the drawer
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  // Function to toggle the drawer
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
@@ -19,21 +18,24 @@ function Generator() {
         position: 'absolute',
         top: 80,
         left: 16,
-        display: { s: 'flex', md: 'none' }
+        display: { xs: 'flex', md: 'none' }
       }} onClick={toggleDrawer}>
         <LibraryMusicIcon />
       </Fab>
 
       <Stack direction='row' justifyContent='space-between' alignItems='start'>
-        <Box sx={{ display: { xs: 'none', md: 'flex' } }}><GenerationList /></Box>
-        <Box sx={{ display: { xs: 'flex', md: 'none' } }}></Box>
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.1)" }}>
+          <GenerationList />
+        </Box>
         <GeneratorMain />
-        <Box></Box>
       </Stack>
 
-      <GenerationsDrawer open={drawerOpen} onClose={toggleDrawer} listComponent={<GenerationList />} />
+      <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+        <GenerationsDrawer open={drawerOpen} onClose={toggleDrawer} listComponent={<GenerationList closeDrawer={toggleDrawer} />} />
+      </Box>
     </Box>
-  )
+  );
 }
+
 
 export default Generator;
