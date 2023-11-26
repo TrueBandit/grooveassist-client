@@ -27,7 +27,9 @@ function Generator() {
         <Box sx={{ display: { xs: 'none', md: 'flex' }, boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.1)" }}>
           <GenerationList />
         </Box>
-        <GeneratorMain />
+        <Box sx={{ width: '100%', margin: '0 auto' }}>
+          <GeneratorMain />
+        </Box>
       </Stack>
 
       <Box sx={{ display: { xs: 'block', md: 'none' } }}>
