@@ -7,7 +7,7 @@ import ProgressionComp from './ProgressionComp';
 import PromptInputComp from './PromptInputComp';
 import loadGif from '../design/composingGif.gif';
 import { Box, Typography } from "@mui/material";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 function StreamingOpenAIComponent() {
 
@@ -21,10 +21,17 @@ function StreamingOpenAIComponent() {
   // The prompt the user builds
   const [promptObject, setPromptObject] = useState({ artist: "", genre: "", level: "", bars: "", key: "" });
 
+  const generationsHistory = useSelector(state => state.chordGenerator.generationsHistory);
+
   useEffect(() => {
     if (generateChordsResult.data && generateChordsResult.data.generateChords) {
-      dispatch({ type: "ADD", payload: { dataObj: generateChordsResult.data.generateChords, entity: "newChordGeneration" } });
-      dispatch({ type: "UPDATE", payload: { dataObj: generateChordsResult.data.generateChords, entity: "changeProgressionDisplay" } });
+      const newProg = {
+        ...generateChordsResult.data.generateChords,
+        'saved': false,
+        'id': generationsHistory.length
+      };
+      dispatch({ type: "ADD", payload: { dataObj: newProg, entity: "newChordGeneration" } });
+      dispatch({ type: "UPDATE", payload: { dataObj: newProg.id, entity: "changeProgressionDisplay" } });
     }
   }, [generateChordsResult.data]);
 
