@@ -16,7 +16,7 @@ function Landing() {
   }, []);
 
   return (
-    <div>
+    <div style={{ backgroundColor: 'ghostwhite', height: '100vh' }}>
       {/* Hero Section */}
       <Box sx={{ margin: 'auto', paddingTop: "20px", paddingLeft: "30px", paddingRight: "30px", paddingBottom: "20px", backgroundColor: 'ghostwhite' }}>
         <Container maxWidth="xl">
@@ -31,7 +31,7 @@ function Landing() {
                 <Typography variant="h5" sx={{ mt: 2 }}>
                   Based in the heart of creativity, we're here to effortlessly enhance your compositions and connect you with a vibrant global community. Dive in and let the harmonies begin.
                 </Typography>
-                <br/>
+                <br />
                 <Button variant="contained" color="secondary" onClick={() => navigate('/generate')}>Lets Go!</Button>
               </Box>
             </Grid>
