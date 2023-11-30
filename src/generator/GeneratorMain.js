@@ -52,7 +52,13 @@ function StreamingOpenAIComponent() {
       <LoadingButton size="small" onClick={submit} endIcon={<MusicNoteRoundedIcon />} loading={generateChordsResult.loading} loadingPosition="end" variant="contained" color="secondary" ><span>Generate</span></LoadingButton>
       <br /><br />
       {generateChordsResult.loading ?
-        <img src={loadGif} style={{ maxWidth: '85%', maxHeight: '400px' }} alt="loadGif" /> :
+        <>
+          Were using the newest gpt-4-1106-preview model, to bring you the most creative and musical results.<br />
+          Longer processing times then usual are to be expected.
+          <br /><br />
+          <img src={loadGif} style={{ maxWidth: '85%', maxHeight: '400px' }} alt="loadGif" />
+        </>
+        :
         <ProgressionComp />}
       <br /><br />
 

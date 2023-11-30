@@ -1,6 +1,6 @@
 import React from 'react'
 import ChordComp from './ChordComp'
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import Divider from '@mui/material/Divider';
@@ -55,12 +55,15 @@ function ProgressionComp() {
             </Grid>
           </Box>
           <br />
-          {displayedSong.exp}
-          <br /><br />
-          {displayedSong.song}
-          <br /><br />
+          <Box sx={{ textAlign: 'left' }}>
+            <u><Typography variant="subtitle1">Some Theory:</Typography></u>
+            <Typography variant="body1">{displayedSong.explanation}</Typography>
+            <br />
+            <u><Typography variant="subtitle1">Similar Song Example:</Typography></u>
+            <Typography variant="body1">{displayedSong.similar_song}</Typography>
+          </Box>
+          <br />
           <Divider />
-
           <Checkbox inputProps={{ 'aria-label': 'save progression' }} icon={<FavoriteBorder />} checkedIcon={<Favorite />} onChange={saveSong} checked={displayedSong.saved} />
         </Box></>}
     </div>

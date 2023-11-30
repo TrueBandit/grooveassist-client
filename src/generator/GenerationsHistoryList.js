@@ -52,7 +52,7 @@ export default function GenerationList({ closeDrawer }) {
                     generationsList.map((generation, index) => (
                         <ListItem disablePadding key={index}>
                             <ListItemButton onClick={() => select(generation.id)}>
-                                <ListItemText primary={generation.brief} />
+                                <ListItemText primary={generation.brief_description} />
                             </ListItemButton>
                         </ListItem>
                     ))

@@ -7,11 +7,12 @@ export const useGraphQLActions = () => {
   generateChords(promptObj: $promptObj) {
     chords {
       bars,
-      chord
-    }
-    exp,
-    song,
-    brief
+      chord_name,
+      notes
+    },
+    explanation,
+    similar_song,
+    brief_description
   }
 }`
 
