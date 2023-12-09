@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { useGraphQLActions } from './GeneratorGraphQL(old_stream)';
 import { useSubscription } from '@apollo/client';
@@ -137,3 +138,4 @@ function StreamingOpenAIComponent() {
 
 export default StreamingOpenAIComponent;
 
+*/
