@@ -12,8 +12,11 @@ import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useGraphQLActions } from '../utilities/GraphQL';
+import { useDispatch } from 'react-redux'
 
 export default function SignUp() {
+
+  const dispatch = useDispatch();
 
   const { addUser, addUserResult } = useGraphQLActions();
 
@@ -34,7 +37,7 @@ export default function SignUp() {
 
   //Navigate out if user already logged in
   useEffect(() => {
-    if (sessionStorage.getItem("userID")) {
+    if (sessionStorage.getItem("userLoggedIn")) {
       navigate('/');
     }
   }, []);
@@ -48,9 +51,14 @@ export default function SignUp() {
       }
     }
     if (addUserResult.data) {
-      sessionStorage["userID"] = addUserResult.data.addUser.user._id
-      sessionStorage["userName"] = addUserResult.data.addUser.user.fname
-      sessionStorage["token"] = addUserResult.data.addUser.user.token
+      const userObject = {
+        userID: addUserResult.data.addUser.user._id,
+        firstName: addUserResult.data.addUser.user.fname,
+        lastName: addUserResult.data.addUser.user.lname,
+        email: addUserResult.data.addUser.user.email,
+        token: addUserResult.data.addUser.user.token
+      }
+      dispatch({ type: "ADD", payload: { dataObj: userObject, entity: "login" } });
       navigate('/');
     }
   }, [addUserResult.data, addUserResult.error]);

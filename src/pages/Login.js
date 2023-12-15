@@ -12,8 +12,11 @@ import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useGraphQLActions } from '../utilities/GraphQL';
+import { useDispatch } from 'react-redux'
 
 export default function SignIn() {
+
+  const dispatch = useDispatch();
 
   const { logUser, logUserResult } = useGraphQLActions();
 
@@ -33,7 +36,7 @@ export default function SignIn() {
 
   //Navigate out if user already logged in
   useEffect(() => {
-    if (sessionStorage.getItem("userID")) {
+    if (sessionStorage.getItem("userLoggedIn")) {
       navigate('/');
     }
   }, []);
@@ -47,9 +50,14 @@ export default function SignIn() {
       }
     }
     if (logUserResult.data) {
-      sessionStorage["userID"] = logUserResult.data.login.user._id
-      sessionStorage["userName"] = logUserResult.data.login.user.fname
-      sessionStorage["token"] = logUserResult.data.login.token
+      const userObject = {
+        userID: logUserResult.data.login.user._id,
+        firstName: logUserResult.data.login.user.fname,
+        lastName: logUserResult.data.login.user.lname,
+        email: logUserResult.data.login.user.email,
+        token: logUserResult.data.login.token
+      }
+      dispatch({ type: "ADD", payload: { dataObj: userObject, entity: "login" } });
       navigate('/');
     }
   }, [logUserResult.data, logUserResult.error]);

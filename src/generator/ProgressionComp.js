@@ -31,14 +31,18 @@ function ProgressionComp() {
 
 
   const saveSong = () => {
-    dispatch({
-      type: "UPDATE",
-      payload: {
-        id: displayedSong.id,
-        newSavedStatus: !displayedSong.saved,
-        entity: "changeNewProgSave"
-      }
-    });
+    if (sessionStorage.getItem("userLoggedIn")) {
+      dispatch({
+        type: "UPDATE",
+        payload: {
+          id: displayedSong.id,
+          newSavedStatus: !displayedSong.saved,
+          entity: "changeNewProgSave"
+        }
+      });
+    } else {
+      alert("You must be logged in to save a progression.")
+    }
   };
 
   return (

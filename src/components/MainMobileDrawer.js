@@ -8,13 +8,17 @@ import Diversity1Icon from '@mui/icons-material/Diversity1';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HubIcon from '@mui/icons-material/Hub';
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function TemporaryDrawer({ open, onClose, navbarHeight }) {
+
+    const dispatch = useDispatch();
+    const userData = useSelector(state => state.userData);
+
     const navigate = useNavigate();
-    const userName = sessionStorage.getItem('userName');
 
     const handleLogout = () => {
-        sessionStorage.clear();
+        dispatch({ type: "REMOVE", payload: { entity: "logout" } });
         navigate('/');
     };
 
@@ -44,9 +48,9 @@ export default function TemporaryDrawer({ open, onClose, navbarHeight }) {
                 </ListItem>
             </List>
             <Divider />
-            {userName ? (
+            {sessionStorage.getItem("userLoggedIn") ? (
                 <List>
-                    <ListSubheader>{userName}</ListSubheader>
+                    <ListSubheader>{userData.firstName}</ListSubheader>
                     <ListItem disablePadding>
                         <ListItemButton onClick={() => navigate('/myhub')}>
                             <ListItemIcon>

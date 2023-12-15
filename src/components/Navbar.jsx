@@ -5,13 +5,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import logo from '../design/logo.png';
 import MainDrawer from '../components/MainMobileDrawer';
+import { useDispatch, useSelector } from 'react-redux'
 
 function ResponsiveAppBar() {
+
+  const dispatch = useDispatch();
+  const userData = useSelector(state => state.userData);
   // Hook to navigate between pages
   const navigate = useNavigate();
-
-  // Retrieve the username from session storage
-  const userName = sessionStorage.getItem('userName');
 
   // Ref for the navbar to measure its height
   const navbarRef = React.useRef(null);
@@ -37,7 +38,7 @@ function ResponsiveAppBar() {
 
   // Logout handler
   const handleLogout = () => {
-    sessionStorage.clear();
+    dispatch({ type: "REMOVE", payload: { entity: "logout" } });
     handleCloseUserMenuDesktop();
     navigate('/');
   };
@@ -59,17 +60,17 @@ function ResponsiveAppBar() {
             <Typography onClick={() => navigate('/community')} sx={navLinkStyle}>Community</Typography>
 
             {/* Conditional rendering based on user authentication */}
-            {userName ? (
+            {sessionStorage.getItem("userLoggedIn") ? (
               <Typography onClick={() => navigate('/myhub')} sx={navLinkStyle}>Creative Hub</Typography>
             ) : (
               <Typography onClick={() => navigate('/login')} sx={navLinkStyle}>Login</Typography>
             )}
 
             {/* User menu for authenticated users */}
-            {userName && (
+            {sessionStorage.getItem("userLoggedIn") && (
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <IconButton onClick={handleOpenUserMenuDesktop} sx={{ p: 0, color: 'white' }}>
-                  <Typography sx={{ color: 'inherit' }}>{userName}</Typography>
+                  <Typography sx={{ color: 'inherit' }}>{userData.firstName}</Typography>
                   <ArrowDropDownIcon />
                 </IconButton>
                 <Menu

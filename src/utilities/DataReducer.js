@@ -11,6 +11,7 @@ const DataReducer = (state = {
       switch (action.payload.entity) {
         // Handle login action
         case "login":
+          sessionStorage["userLoggedIn"] = true;
           return { ...state, userData: action.payload.dataObj };
 
         // Add a new chord generation to the history
@@ -31,6 +32,7 @@ const DataReducer = (state = {
       switch (action.payload.entity) {
         // Handle logout action
         case "logout":
+          sessionStorage.removeItem("userLoggedIn");
           return { ...state, userData: {} };
 
         default:

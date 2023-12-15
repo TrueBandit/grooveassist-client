@@ -6,6 +6,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import MyProgressions from './MyProgressions';
+import CommunityProgressions from './CommunityProgressions';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,7 +53,7 @@ export default function BasicTabs() {
   };
 
   useEffect(() => {
-    if (!sessionStorage.getItem("userID")) {
+    if (!sessionStorage.getItem("userLoggedIn")) {
       navigate('/login');
     }
   }, []);
@@ -66,10 +68,10 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        My Progressions
+        <MyProgressions />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Community Progressions
+        <CommunityProgressions />
       </CustomTabPanel>
     </Box>
   );
