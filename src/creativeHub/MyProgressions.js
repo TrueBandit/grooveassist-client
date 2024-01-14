@@ -27,7 +27,7 @@ function MyProgressions() {
                     :
                     userProgressions.slice(0).reverse().map((progObject, index) => (
                         <>
-                            <Box sx={{ margin: 'auto', paddingTop: "5px", paddingLeft: "10px", paddingRight: "10px", paddingBottom: "20px", width: "60%", backgroundColor: 'azure', borderRadius: "0px", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" }}>
+                            <Box sx={{ margin: 'auto', paddingTop: "5px", paddingLeft: "10px", paddingRight: "10px", paddingBottom: "20px", width: "70%", backgroundColor: 'azure', borderRadius: "0px", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" }}>
                                 <Typography variant="subtitle1">{progObject.prog.brief_description}</Typography>
                                 <Typography variant="body1">Created at: {progObject.creationTime.day}, {progObject.creationTime.time}</Typography>
                                 <Divider />
