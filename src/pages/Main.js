@@ -26,7 +26,7 @@ function Main() {
         <Route path="" element={<Landing />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
-        <Route path="myhub" element={<MyHub />} />
+        <Route path="hub" element={<MyHub />} />
         <Route path="profile" element={<Profile />} />
       </Routes>
     </div>

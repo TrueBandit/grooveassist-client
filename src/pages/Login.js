@@ -17,10 +17,9 @@ import { useDispatch } from 'react-redux'
 export default function SignIn() {
 
   const dispatch = useDispatch();
-
-  const { logUser, logUserResult } = useGraphQLActions();
-
   const navigate = useNavigate();
+
+  const { logUser, logUserResult, getUserProgs, getUserProgsResult } = useGraphQLActions();
 
   const [userLoginObject, setUserLoginObject] = useState({ email: "", password: "" })
 
@@ -58,9 +57,21 @@ export default function SignIn() {
         token: logUserResult.data.login.token
       }
       dispatch({ type: "ADD", payload: { dataObj: userObject, entity: "login" } });
-      navigate('/');
+      try {
+        getUserProgs({ variables: { token: logUserResult.data.login.token } });
+      } catch (error) {
+        console.error("Error fetching user progressions:", error);
+      }
     }
   }, [logUserResult.data, logUserResult.error]);
+
+  useEffect(() => {
+    if (getUserProgsResult.data) {
+      dispatch({ type: "ADD", payload: { dataObj: getUserProgsResult.data.getUserProgressions, entity: "initalHubData" } });
+      navigate('/');
+    }
+  }, [getUserProgsResult.data])
+
 
   return (
     <Container maxWidth="xs">

@@ -56,7 +56,7 @@ export default function SignUp() {
         firstName: addUserResult.data.addUser.user.fname,
         lastName: addUserResult.data.addUser.user.lname,
         email: addUserResult.data.addUser.user.email,
-        token: addUserResult.data.addUser.user.token
+        token: addUserResult.data.addUser.token
       }
       dispatch({ type: "ADD", payload: { dataObj: userObject, entity: "login" } });
       navigate('/');

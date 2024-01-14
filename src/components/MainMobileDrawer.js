@@ -52,7 +52,7 @@ export default function TemporaryDrawer({ open, onClose, navbarHeight }) {
                 <List>
                     <ListSubheader>{userData.firstName}</ListSubheader>
                     <ListItem disablePadding>
-                        <ListItemButton onClick={() => navigate('/myhub')}>
+                        <ListItemButton onClick={() => navigate('/hub')}>
                             <ListItemIcon>
                                 <HubIcon />
                             </ListItemIcon>

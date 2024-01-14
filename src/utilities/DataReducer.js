@@ -3,6 +3,9 @@ const DataReducer = (state = {
   chordGenerator: {
     generationsHistory: [],
     displayedProgID: null
+  },
+  creativeHub: {
+    userProgressions: []
   }
 }, action) => {
   switch (action.type) {
@@ -24,6 +27,24 @@ const DataReducer = (state = {
             }
           };
 
+        case "initalHubData":
+          return {
+            ...state,
+            creativeHub: {
+              ...state.creativeHub,
+              userProgressions: action.payload.dataObj
+            }
+          };
+
+        case "addUserProgression":
+          return {
+            ...state,
+            creativeHub: {
+              ...state.creativeHub,
+              userProgressions: [...state.creativeHub.userProgressions, action.payload.dataObj]
+            }
+          };
+
         default:
           return state;
       }
@@ -33,7 +54,7 @@ const DataReducer = (state = {
         // Handle logout action
         case "logout":
           sessionStorage.removeItem("userLoggedIn");
-          return { ...state, userData: {} };
+          return { ...state, userData: {}, creativeHub: { userProgressions: [] }, chordGenerator: { generationsHistory: [], displayedProgID: null } };
 
         default:
           return state;

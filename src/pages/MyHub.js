@@ -6,10 +6,11 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import MyProgressions from './MyProgressions';
-import CommunityProgressions from './CommunityProgressions';
+import MyProgressions from '../creativeHub/MyProgressions';
+import CommunityProgressions from '../creativeHub/CommunityProgressions';
 
 function CustomTabPanel(props) {
+
   const { children, value, index, ...other } = props;
 
   return (
@@ -42,7 +43,7 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function CreativeHub() {
 
   const navigate = useNavigate();
 

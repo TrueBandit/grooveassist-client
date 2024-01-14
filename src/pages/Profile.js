@@ -22,7 +22,9 @@ function Community() {
 
       <Typography variant="subtitle1">Hi, {userData.firstName + " " + userData.lastName}</Typography>
       Email: {userData.email}<br />
-      ID: {userData.userID}
+      ID: {userData.userID}<br />
+      Token: {userData.token}<br />
+
     </Box>
   )
 }

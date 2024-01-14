@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import GeneratorMain from '../generator/GeneratorMain';
+import GeneratorMain from '../chordGenerator/GeneratorMain';
 import { Box, Stack, Fab } from "@mui/material";
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
-import GenerationList from '../generator/GenerationsHistoryList';
-import GenerationsDrawer from '../generator/GenerationsHistoryDrawer';
+import GenerationList from '../chordGenerator/GenerationsHistoryList';
+import GenerationsDrawer from '../chordGenerator/GenerationsHistoryDrawer';
 
 function Generator() {
   const [drawerOpen, setDrawerOpen] = useState(false);

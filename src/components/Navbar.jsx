@@ -61,7 +61,7 @@ function ResponsiveAppBar() {
 
             {/* Conditional rendering based on user authentication */}
             {sessionStorage.getItem("userLoggedIn") ? (
-              <Typography onClick={() => navigate('/myhub')} sx={navLinkStyle}>Creative Hub</Typography>
+              <Typography onClick={() => navigate('/hub')} sx={navLinkStyle}>Creative Hub</Typography>
             ) : (
               <Typography onClick={() => navigate('/login')} sx={navLinkStyle}>Login</Typography>
             )}
