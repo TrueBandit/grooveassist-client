@@ -68,9 +68,55 @@ function PromptInputComp({ updatePromptObject }) {
     )
 }
 
-const artists = ["The Beatles", "Elvis Presley", "Michael Jackson", "Elton John", "Queen", "Madonna", "Led Zeppelin"];
+const artists = [
+    "Adele",
+    "Amy Winehouse",
+    "Ariana Grande",
+    "Beyoncé",
+    "Billie Eilish",
+    "Bob Dylan",
+    "Bruno Mars",
+    "David Bowie",
+    "Ed Sheeran",
+    "Elton John",
+    "Elvis Presley",
+    "Frank Sinatra",
+    "Led Zeppelin",
+    "Madonna",
+    "Michael Jackson",
+    "Nirvana",
+    "Prince",
+    "Queen",
+    "Steely Dan",
+    "Taylor Swift",
+    "The Beatles",
+    "The Rolling Stones",
+    "U2"
+];
+const genres = [
+    "Blues",
+    "Classical",
+    "Country",
+    "Disco",
+    "Electronic",
+    "Folk",
+    "Funk",
+    "Gospel",
+    "Hip-Hop",
+    "Indie",
+    "Jazz",
+    "Latin",
+    "Metal",
+    "Pop",
+    "Punk",
+    "RnB",
+    "Reggae",
+    "Rock",
+    "Soul",
+    "World Music"
+];
+
 const bars = ["4", "6", "8", "10", "12"];
-const genres = ["Rock", "Jazz", "Blues", "Hip-Hop", "RnB"];
 const levels = ["Begginer", "Intermediate", "Advanced"];
 const keys = ["A", "Ab", "B", "Bb", "C", "D", "Db", "E", "Eb", "F", "G", "Gb"]
 
